@@ -2,7 +2,10 @@ This web game is a classic space shooter where you control a spaceship, dodging 
 
 ## Controls
 
+Desktop:
 - **Left Arrow**: Move left
 - **Right Arrow**: Move right
 - **Spacebar**: Shoot bullets
 
+Mobile:
+Tap left or right to move. Long press to shoot.

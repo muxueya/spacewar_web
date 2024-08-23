@@ -24,6 +24,10 @@ canvas {
     display: none;
 }
 
+.instructions {
+    margin-bottom: 20px; /* Space between instructions and buttons */
+}
+
 .difficultyButton {
     padding: 15px 30px;
     margin: 10px;

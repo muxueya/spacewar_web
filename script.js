@@ -19,6 +19,7 @@ let enemySpeed = 2; // Initial speed of enemies
 let rockCount = 0; // Number of rocks to generate
 let difficultyLevel = 'easy'; // Default difficulty level
 let startTime; // Variable to track game start time
+let shooting = false; // Track if shooting is active
 
 // Spaceship object
 function createSpaceship() {
@@ -111,6 +112,11 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     spaceship.update();
     spaceship.draw();
+
+    // Shooting bullets if the shooting flag is active
+    if (shooting) {
+        bullets.push(createBullet(spaceship.x, spaceship.y)); // Create a new bullet
+    }
 
     bullets.forEach((bullet, bulletIndex) => {
         bullet.update();
@@ -249,21 +255,14 @@ canvas.addEventListener('touchstart', (event) => {
         keys['ArrowRight'] = true;
         keys['ArrowLeft'] = false;
     }
+
+    shooting = true; // Start shooting on touch
 });
 
 canvas.addEventListener('touchend', () => {
     keys['ArrowLeft'] = false;
     keys['ArrowRight'] = false; // Stop moving on touch end
-});
-
-// Double-tap to shoot
-let lastTapTime = 0;
-canvas.addEventListener('touchstart', (event) => {
-    const currentTime = Date.now();
-    if (currentTime - lastTapTime < 300) { // Check for double tap within 300ms
-        bullets.push(createBullet(spaceship.x, spaceship.y)); // Shoot bullet
-    }
-    lastTapTime = currentTime; // Update last tap time
+    shooting = false; // Stop shooting on touch end
 });
 
 // Initialization (optional)
