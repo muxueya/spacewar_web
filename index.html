@@ -8,6 +8,18 @@
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
+    <div id="startScreen" class="screen">
+        <h1>Space Shooter Game</h1>
+        <h2>Select Difficulty</h2>
+        <button class="difficultyButton easy" data-level="easy">Easy</button>
+        <button class="difficultyButton medium" data-level="medium">Medium</button>
+        <button class="difficultyButton hard" data-level="hard">Hard</button>
+    </div>
+    <div id="gameOverScreen" class="hidden">
+        <h1>Game Over</h1>
+        <h2 id="finalScore"></h2>
+        <button id="newGameButton">Start a New Game</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
