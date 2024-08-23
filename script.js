@@ -214,7 +214,7 @@ newGameButton.addEventListener('click', () => {
     gameOverScreen.classList.add('hidden'); // Hide game over screen
 });
 
-// Event listeners
+// Event listeners for keyboard controls
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
     if (e.key === ' ') {
@@ -232,6 +232,38 @@ document.querySelectorAll('.difficultyButton').forEach(button => {
         gameOver = false; // Reset game over state
         startGame(e.target.dataset.level); // Start new game with selected difficulty
     });
+});
+
+// Touch controls for mobile devices
+canvas.addEventListener('touchstart', (event) => {
+    const touchX = event.touches[0].clientX; // Get touch position
+    const canvasBounds = canvas.getBoundingClientRect();
+    const relativeX = touchX - canvasBounds.left; // Calculate relative position
+
+    if (relativeX < canvas.width / 2) {
+        // Move left
+        keys['ArrowLeft'] = true;
+        keys['ArrowRight'] = false;
+    } else {
+        // Move right
+        keys['ArrowRight'] = true;
+        keys['ArrowLeft'] = false;
+    }
+});
+
+canvas.addEventListener('touchend', () => {
+    keys['ArrowLeft'] = false;
+    keys['ArrowRight'] = false; // Stop moving on touch end
+});
+
+// Double-tap to shoot
+let lastTapTime = 0;
+canvas.addEventListener('touchstart', (event) => {
+    const currentTime = Date.now();
+    if (currentTime - lastTapTime < 300) { // Check for double tap within 300ms
+        bullets.push(createBullet(spaceship.x, spaceship.y)); // Shoot bullet
+    }
+    lastTapTime = currentTime; // Update last tap time
 });
 
 // Initialization (optional)
